@@ -35,6 +35,11 @@ public class DataRetrieval {
 	public List<CoolDataDto> fetchData() throws Exception {
 		try {
 			String prefix = env.getProperty("station.prefix");
+
+			/* Eliminate quotes if present */
+			if (prefix.startsWith("\""))
+				prefix = prefix.substring(1, prefix.length() - 1);
+
 			List<CoolDataDto> result = new ArrayList<CoolDataDto>();
 			result.add(new CoolDataDto(prefix + "A", "temperature", 23.0, true, new Date()));
 			LOG.debug("Fetching: {}", result.get(0));

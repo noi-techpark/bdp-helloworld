@@ -68,7 +68,7 @@ public class DataPusher extends JSONPusher {
 				List<RecordDtoImpl> values = metricMap.getData();
 
 				SimpleRecordDto simpleRecordDto = new SimpleRecordDto(station.getDate().getTime(), station.getValue());
-				simpleRecordDto.setPeriod(env.getProperty("datatypes.period", Integer.class));
+				simpleRecordDto.setPeriod(env.getProperty("period", Integer.class));
 				values.add(simpleRecordDto);
 			} catch (Exception e) {
 				LOG.error("Problem during data map creation: " + e.getMessage());

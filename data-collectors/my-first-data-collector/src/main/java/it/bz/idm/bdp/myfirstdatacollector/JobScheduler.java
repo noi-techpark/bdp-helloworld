@@ -16,6 +16,7 @@ import it.bz.idm.bdp.myfirstdatacollector.dto.CoolDataDto;
 
 /**
  * Cronjob configuration can be found under src/main/resources/META-INF/spring/applicationContext.xml
+ * XXX Do not forget to configure it!
  */
 @Component
 public class JobScheduler {
@@ -31,6 +32,7 @@ public class JobScheduler {
 	@Autowired
 	private DataRetrieval retrieval;
 
+	/** JOB 1 */
 	public void pushStations() throws Exception {
 		List<CoolDataDto> data = retrieval.fetchData();
 
@@ -38,14 +40,15 @@ public class JobScheduler {
 		for (CoolDataDto dto : data) {
 			StationDto station = new StationDto();
 			station.setName(dto.getStation());
-			station.setStationType("Teststation");
-			station.setOrigin(env.getProperty("dataset.origin")); // The source of our data set
+			station.setStationType(env.getProperty("station.type"));
+			station.setOrigin(env.getProperty("origin")); // The source of our data set
 			stationList.add(station);
 		}
 
 		pusher.syncStations(stationList);
 	}
 
+	/** JOB 2 */
 	public void pushDataTypes() throws Exception {
 		List<CoolDataDto> data = retrieval.fetchData();
 
@@ -53,14 +56,15 @@ public class JobScheduler {
 		for (CoolDataDto dto : data) {
 			DataTypeDto type = new DataTypeDto();
 			type.setName(dto.getStation());
-			type.setPeriod(600);
+			type.setPeriod(env.getProperty("period", Integer.class));
 			dataTypeList.add(type);
 		}
 
 		pusher.syncDataTypes(dataTypeList);
 	}
 
-	public void pushDataToCollector() throws Exception {
+	/** JOB 3 */
+	public void pushData() throws Exception {
 		List<CoolDataDto> data = retrieval.fetchData();
 
 		try {
