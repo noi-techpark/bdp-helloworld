@@ -41,13 +41,13 @@ public class DataRetrieval {
 				prefix = prefix.substring(1, prefix.length() - 1);
 
 			List<CoolDataDto> result = new ArrayList<CoolDataDto>();
-			result.add(new CoolDataDto(prefix + "A", "temperature", 23.0, true, new Date()));
+			result.add(new CoolDataDto(prefix + "A", "temperature", "°C", 23.0, true, new Date()));
 			LOG.debug("Fetching: {}", result.get(0));
-			result.add(new CoolDataDto(prefix + "A", "pressure", 1.2, true, new Date()));
+			result.add(new CoolDataDto(prefix + "A", "pressure", "bar", 1.2, true, new Date()));
 			LOG.debug("Fetching: {}", result.get(1));
-			result.add(new CoolDataDto(prefix + "B", "temperature", 21.0, true, new Date()));
+			result.add(new CoolDataDto(prefix + "B", "temperature", "°C", 21.0, true, new Date()));
 			LOG.debug("Fetching: {}", result.get(2));
-			result.add(new CoolDataDto(prefix + "B", "pressure", 1.5, true, new Date()));
+			result.add(new CoolDataDto(prefix + "B", "pressure", "bar", 1.5, true, new Date()));
 			LOG.debug("Fetching: {}", result.get(3));
 			return result;
 		} catch (Exception e) {

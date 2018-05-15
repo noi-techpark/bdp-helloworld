@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 
 import it.bz.idm.bdp.dto.DataTypeDto;
 import it.bz.idm.bdp.dto.StationDto;
@@ -39,13 +40,18 @@ public class JobScheduler {
 		StationList stationList = new StationList();
 		for (CoolDataDto dto : data) {
 			StationDto station = new StationDto();
-			station.setName(dto.getStation());
+			station.setId(dto.getStation());
+			station.setName("Cool non-unique name for ID " + dto.getStation());
 			station.setStationType(env.getProperty("station.type"));
 			station.setOrigin(env.getProperty("origin")); // The source of our data set
 			stationList.add(station);
 		}
 
-		pusher.syncStations(stationList);
+		try {
+			pusher.syncStations(stationList);
+		} catch (HttpClientErrorException e) {
+			System.out.println(e.getResponseBodyAsString());
+		}
 	}
 
 	/** JOB 2 */
@@ -55,8 +61,9 @@ public class JobScheduler {
 		List<DataTypeDto> dataTypeList = new ArrayList<DataTypeDto>();
 		for (CoolDataDto dto : data) {
 			DataTypeDto type = new DataTypeDto();
-			type.setName(dto.getStation());
+			type.setName(dto.getName());
 			type.setPeriod(env.getProperty("period", Integer.class));
+			type.setUnit(dto.getUnit());
 			dataTypeList.add(type);
 		}
 

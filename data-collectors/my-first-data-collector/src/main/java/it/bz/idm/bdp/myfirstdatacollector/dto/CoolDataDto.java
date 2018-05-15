@@ -11,12 +11,14 @@ public class CoolDataDto implements Serializable {
 	 */
 	private String station;
 	private String name;
+	private String unit;
 	private Double value;
 	private boolean active;
 	private Date date;
 
-	public CoolDataDto(String station, String name, Double value, boolean active, Date date) {
+	public CoolDataDto(String station, String name, String unit, Double value, boolean active, Date date) {
 		super();
+		this.setUnit(unit);
 		this.setDate(date);
 		this.station = station;
 		this.name = name;
@@ -64,9 +66,17 @@ public class CoolDataDto implements Serializable {
 		this.date = date;
 	}
 
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
 	@Override
 	public String toString() {
-		return "CoolDataDto [station=" + station + ", name=" + name + ", value=" + value + ", active=" + active + ", date=" + date + "]";
+		return "CoolDataDto [station=" + station + ", name=" + name + ", unit=" + unit + ", value=" + value + ", active=" + active + ", date=" + date + "]";
 	}
 
 }
