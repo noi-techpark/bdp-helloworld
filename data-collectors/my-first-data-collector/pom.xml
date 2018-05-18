@@ -91,7 +91,8 @@
 	</dependencies>
 
 	<build>
-		<finalName>dc-myfirstdatacollector</finalName>
+		<!-- Final names should be of the following pattern: dc-<type of data>-<origin of data> -->
+		<finalName>dc-helloworld-numberone</finalName>
 		<testSourceDirectory>src/test/java/</testSourceDirectory>
 		<plugins>
 			<plugin>
