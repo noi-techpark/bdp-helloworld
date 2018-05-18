@@ -20,6 +20,7 @@ Steps to create your own data collector:
     - `pushStation`, which pushes station details through `DataPusher.syncStations`
     - `pushDataTypes`, which pushes data type details through `DataPusher.syncDataTypes`
     - `pushData`, which pushes the data itself after adaptations with `DataPusher.mapData` through `DataPusher.pushData`
+  - Test it with [unit tests](https://github.com/idm-suedtirol/bdp-helloworld/blob/master/data-collectors/my-first-data-collector/src/test/java/it/bz/idm/bdp/myfirstdatacollector/DataPusherTest.java)
   
   
 Important:
