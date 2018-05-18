@@ -37,7 +37,7 @@ public class DataRetrieval {
 			String prefix = env.getProperty("station.prefix");
 
 			/* Eliminate quotes if present */
-			if (prefix.startsWith("\""))
+			if (prefix.startsWith("\"") && prefix.endsWith("\""))
 				prefix = prefix.substring(1, prefix.length() - 1);
 
 			List<CoolDataDto> result = new ArrayList<CoolDataDto>();
